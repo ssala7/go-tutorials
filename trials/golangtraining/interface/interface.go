@@ -30,6 +30,8 @@ func (a Alien) speak() {
 	fmt.Println("&^&^&^&&&^&&^")
 }
 
+type T struct{}
+
 func main() {
 	speakers := []Speaker{
 		Dog{},
@@ -41,4 +43,24 @@ func main() {
 	for _, sp := range speakers {
 		sp.speak()
 	}
+	var i interface{} = 1
+	s := i.(int)
+	fmt.Println(s)
+	f(2)
+}
+
+func f(i interface{}) {
+	switch v := i.(type) {
+	case string:
+		println("string:", v)
+	case int:
+		println("int:", v)
+	case int32, int64:
+		println("int32 or int64:", v)
+	case T:
+		fmt.Println("custom type:", v)
+	default:
+		println("other")
+	}
+
 }
